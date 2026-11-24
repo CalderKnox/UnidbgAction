@@ -36,6 +36,15 @@ dependencies {
 
 }
 
+// junit-jupiter does not bring the JUnit Platform launcher, so Gradle supplies the one bundled with
+// Gradle itself (1.8.2 in Gradle 8.10). That is older than the Jupiter engine on the test classpath,
+// which is pulled up by the commons-io platform above, and test discovery then aborts with
+// "OutputDirectoryCreator not available". Declaring the launcher without a version takes the version
+// from junit-bom, i.e. the one that matches the engine.
+dependencies {
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
 tasks.test {
     useJUnitPlatform()
 
