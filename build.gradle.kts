@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     // unidbg
-    implementation("com.github.zhkl0228:unidbg-android:0.9.8")
+    implementation("com.github.zhkl0228:unidbg-android:0.9.9")
     implementation(platform("commons-io:commons-io:+"))
     implementation("com.github.zhkl0228:unidbg-api:0.9.8")
 
