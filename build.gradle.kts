@@ -1,3 +1,6 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
     id("java")
 
@@ -35,4 +38,16 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+
+    // By default Gradle only says "There were failing tests" and leaves the details in
+    // build/reports/tests/test, which only exists on the machine that ran the build.
+    testLogging {
+        events(
+            TestLogEvent.PASSED,
+            TestLogEvent.FAILED,
+            TestLogEvent.SKIPPED,
+        )
+        exceptionFormat = TestExceptionFormat.FULL
+        showStandardStreams = true
+    }
 }
