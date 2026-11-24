@@ -19,6 +19,9 @@ jobs:
     permissions:
       contents: read
     strategy:
+      # Report every JDK in the matrix: with the default fail-fast, the other legs are
+      # cancelled as soon as one fails, so their result is never visible.
+      fail-fast: false
       matrix:
         java-version:
           - 8
@@ -41,6 +44,20 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
+
+      # Some failures never reach the console, even with testLogging enabled: when the test framework
+      # itself fails (e.g. it cannot discover any test), Gradle records a synthetic
+      # "failed to execute tests" case in the XML results only. Print them so the cause shows up in the log.
+      - name: Print test results if the build failed
+        if: failure()
+        run: |
+          shopt -s nullglob
+          files=(build/test-results/test/TEST-*.xml)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "::warning::The build failed before any test result file was written."
+          else
+            cat "${files[@]}"
+          fi
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
