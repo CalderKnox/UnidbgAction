@@ -32,7 +32,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("org.slf4j:slf4j-api:2.0.20")
-    implementation("org.slf4j:slf4j-reload4j:2.0.16")
+    implementation("org.slf4j:slf4j-reload4j:2.0.20")
 
 }
 
