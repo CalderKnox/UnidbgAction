@@ -25,7 +25,7 @@ dependencies {
     // unidbg backend
     implementation("com.github.zhkl0228:unidbg-dynarmic:0.9.9")
     implementation("com.github.zhkl0228:unidbg-hypervisor:0.9.8")
-    implementation("com.github.zhkl0228:unidbg-kvm:0.9.8")
+    implementation("com.github.zhkl0228:unidbg-kvm:0.9.9")
     implementation("com.github.zhkl0228:unidbg-unicorn2:0.9.9")
 
     // default
